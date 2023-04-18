@@ -26,7 +26,7 @@ def index():
     #         <h2>Welcome</h2>
     #         Hello, Web
     #     </body>
-    # </html>
+    # </html> 복붙 대마왕임 ㄹㅇ 하나 배웠다 ㅋㅋ
     # '''
 
 @app.route('/create/')
@@ -40,3 +40,4 @@ def read(ab):
 
 if __name__ == "__main__":
     app.run(port=5001)
+
