@@ -26,11 +26,8 @@ def index():
     #         <h2>Welcome</h2>
     #         Hello, Web
     #     </body>
-    # </html> # zz
-    # ''' 싹 살아남 ㅇㅎ
-
-#그리고 이것도 가능한데 음... 나한번만 해볼래
-ㅇㅋㄷㅋ
+    # </html>
+    # '''
 
 @app.route('/create/')
 def create():
