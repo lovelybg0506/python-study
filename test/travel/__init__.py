@@ -1,0 +1,1 @@
+__all__ = ["vietnam","thailand"] # vietnam 파일 import가능
