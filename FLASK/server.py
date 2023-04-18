@@ -26,7 +26,7 @@ def index():
     #         <h2>Welcome</h2>
     #         Hello, Web
     #     </body>
-    # </html> 복붙 대마왕임 ㄹㅇ 하나 배웠다 ㅋㅋ
+    # </html>
     # '''
 
 @app.route('/create/')
