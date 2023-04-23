@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import datetime as dt # 날짜추가(매일 새로운 파일로 생성해서 쓰려고)
+import csv # 엑셀
 
 today = dt.datetime.now().strftime("%Y_%m_%d")
 
@@ -30,24 +31,32 @@ def stockCrawling(code):
     else:
         upOrDown = '변동없음'
 
-    return stockName, nowPrice, varAmount, upOrDown
+    return {
+        "stockName":stockName,
+        "nowPrice":nowPrice,
+        "varAmount":varAmount,
+        "upOrDown":upOrDown
+        }
 
-f = open(f'todayStock_{today}.txt', 'w', encoding='utf-8') # 인코딩 방식 안써줘서 한글 깨졌음
-f.write(f"######<{today} 주식>######\n")
-f.close()
-
-for i in codeList:
-    stockName = stockCrawling(i)[0] # 종목명
-    nowPrice = stockCrawling(i)[1]  # 현재가
-    varAmount = stockCrawling(i)[2] # 변동금액
-    upOrDown = stockCrawling(i)[3]  # 상승 or 하락
-
-    f = open(f'todayStock_{today}.txt', 'a', encoding='utf-8')
-    f.write(f"\n<{stockName}>")
-    f.write(f"\n현재가   : {nowPrice}")
-    f.write(f"\n변동금액 : {varAmount}")
-    f.write(f"\n상승,하락 : {upOrDown}")
-    f.write("\n")
-    f.write("\n============================")
-    f.write("\n")
+if __name__ == "__main__":
+    # outputfile = open('output' + today + '.csv', 'w')
+    # csvwriter = csv.writer(outputfile)
+    # csvwriter.writerow(['날짜','이름','현재가','변동금액','비고'])
+    
+    f = open(f'todayStock_{today}.txt', 'w', encoding='utf-8') # 인코딩 방식 안써줘서 한글 깨졌음
+    f.write(f"######<{today} 주식>######\n")
     f.close()
+
+    for i in codeList:
+        stock = stockCrawling(i) 
+        # csvwriter.writerow([str(today),str(stock['stockName']),str(stock['nowPrice']),str(stock['varAmount']), str(stock['upOrDown'])])
+
+        f = open(f'todayStock_{today}.txt', 'a', encoding='utf-8')
+        f.write(f"\n<{stock['stockName']}>")
+        f.write(f"\n현재가   : {stock['nowPrice']}")
+        f.write(f"\n변동금액 : {stock['varAmount']}")
+        f.write(f"\n상승,하락 : {stock['upOrDown']}")
+        f.write("\n")
+        f.write("\n============================")
+        f.write("\n")
+        f.close()
