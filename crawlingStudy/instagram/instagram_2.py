@@ -19,6 +19,9 @@ time.sleep(3)
 # 페이지이동
 ujh = driver.get('https://www.instagram.com/instagramSomeoneId/')
 
+# 테스트하느라 로그인 너무 많이해서그런가 갑자기 로그인막힘 그래서 밑에 테스트 하다가 끊김;
+# Instagram에 연결할 수 없습니다. 인터넷에 연결되어 있는지 확인한 후 다시 시도해보세요.
+
 
 # 첫번째 사진클릭
 driver.implicitly_wait(10)
