@@ -19,14 +19,14 @@ driver.get('https://nid.naver.com/nidlogin.login?svctype=262144&url=http://m.nav
 # 그냥 아이디 입력이 아니라 ctrl+v로 아이디입력 (캡쳐검증 방지?)
 time.sleep(2)
 
-pyperclip.copy('lovelybg0506') # Ctrl + c 아이디
+pyperclip.copy('네이버아이디') # Ctrl + c 아이디
 
 e = driver.find_element_by_css_selector('#id') # 네이버로그인창의 id창 id
-# e.send_keys('lovelybg0506') # 이렇게하면 아이디 입력이 너무 빠르다고 인지하고 자동입력방지 문자(사람인지확인) 입력하게함
+# e.send_keys('네이버아이디') # 이렇게하면 아이디 입력이 너무 빠르다고 인지하고 자동입력방지 문자(사람인지확인) 입력하게함
 e.send_keys(Keys.CONTROL, 'v') # Ctrl + v 키 입력 (이런식으로 Ctrl + c,v 를 이용하면 우회가능)
 
 time.sleep(2)
-pyperclip.copy('@rkdqudrb11')
+pyperclip.copy('네이버비밀번호')
 e = driver.find_element_by_css_selector('#pw')
 e.send_keys(Keys.CONTROL, 'v')
 
@@ -51,6 +51,6 @@ newTitle = driver.find_element_by_css_selector('.se_textarea')
 newContent = driver.find_element_by_css_selector('.se_editable')
 uploadBtn = driver.find_element_by_css_selector('.btn_applyPost')
 
-newTitle.send_keys('파이썬 테스트 1')
-newContent.send_keys('파이썬을 이용해 자동으로 글을 등록하는 테스트 1')
+newTitle.send_keys('ManchesterCity')
+newContent.send_keys('맨시티 리그 + 챔스 우승하러가자~')
 uploadBtn.click()
