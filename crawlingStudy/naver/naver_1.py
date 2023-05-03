@@ -16,9 +16,7 @@ opt.add_argument(r'user-data-dir=C:\Users\lovel\AppData\Local\Google\Chrome\User
 # driver = webdriver.Chrome('chromedriver.exe', chrome_options=opt) # 이렇게 썼더니 계속 오류나서 크롬드라이버 절대경로 지정해서 오류해결
 driver = webdriver.Chrome(executable_path=r'C:\Program Files\Google\Chrome\Application\chromedriver.exe', chrome_options=opt)
 
-
-
-
+# 이미지 업로드하는 함수 (execute_script를 이용해서 네이버스크립트 함수를 작동시킴)
 def uploadImg(path):
     img = driver.find_element_by_css_selector('#input_image')
     img.send_keys(path)
@@ -81,15 +79,9 @@ time.sleep(1)
 uploadImg('C:/Users/lovel/OneDrive/Desktop/mine/Haaland.jpeg')
 time.sleep(1)
 
-# driver.implicitly_wait(10)
-# img.send_keys('./ManchesterCity11.jpg')
 driver.implicitly_wait(10)
 uploadBtn = driver.find_element_by_css_selector('.btn_applyPost')
 # uploadBtn.click() # 등록버튼
-
-# 저기에지정된 파일을 찾을 수 없습니다. (0x2) 이 오류는 그냥 나도 잘 되길래 걍 무시하면서 했음
-# ㅣ근데이제 selector":"#input_image"} 이게 자꾸 걸려
-
 
 if __name__ == "__main__":
     print('dev')
