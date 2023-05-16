@@ -19,7 +19,7 @@ import re # 정규식
 
 # a = re.search('abc', 'alksacjdhf') # abc가 있냐 (문자찾기) 맞으면 Object형태값 return, 아니면 None
 # a = re.search('^abc', 'alksaabccjdhf') # ^abc : abc로 시작하냐
-
+'''
 def 함수2(a):
 
     if re.search('Chair', str(a)): # 정규식과는 글자만 비교가능
@@ -34,3 +34,24 @@ def 함수2(a):
 raw['카테고리'] = raw['상품목록'].apply(함수2)
 
 print(raw)
+'''
+
+'''
+def furniture(a):
+    if re.search('Mirror|Sofa', str(a)):
+        return '가구'
+
+raw['카테고리'] = raw['상품목록'].apply(furniture)
+print(raw)
+'''
+
+'''
+def error(a):
+    if re.search('[\D]', str(a)): # 문자가 하나라도 있으면 return a
+        return a
+    else:
+        return '에러' # 문자가 없고 숫자만있으면 에러
+
+raw['상품목록'] = raw['상품목록'].apply(error)
+print(raw)
+'''
