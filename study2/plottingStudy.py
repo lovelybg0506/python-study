@@ -22,7 +22,6 @@ plt.show()
 '''
 [이동평균선]
 n일간 가격을 평균내서 그래프로 그린 것
-'''
 df = data.DataReader('005930', 'naver', start="2019-01-01", end="2020-01-01")
 
 df['Close'] = df['Close'].astype(float) # dtype : float로 바꾸기
@@ -31,3 +30,4 @@ df['rolling20'] = df['Close'].rolling(20).mean() # 20일 평균
 
 # plt.plot(df)
 # plt.show()
+'''
