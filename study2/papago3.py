@@ -4,11 +4,12 @@ import urllib.request
 import json
 
 # 함수화
-def translation(content):
+def translation(content, From_language, To_language):
     client_id = "TVq2GqB8fYAfOLKVkjc_" # 개발자센터에서 발급받은 Client ID 값
     client_secret = "iCQCSnvLbH" # 개발자센터에서 발급받은 Client Secret 값
     encText = urllib.parse.quote(content)
-    data = "source=en&target=ko&text=" + encText
+    language = f"source={From_language}&target={To_language}&text="
+    data = language + encText
     url = "https://openapi.naver.com/v1/papago/n2mt"
     request = urllib.request.Request(url)
     request.add_header("X-Naver-Client-Id",client_id)
