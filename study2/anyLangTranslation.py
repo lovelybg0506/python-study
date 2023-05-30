@@ -18,8 +18,8 @@ id : 인도네시아어
 hi : 힌디어
 '''
 
-content = '표준잔가율'
+content = '으아악'
 
-a = translation(content, 'ko', 'en')
+result = translation(content, 'ko', 'en')
 
-print(a)
+print(result)
