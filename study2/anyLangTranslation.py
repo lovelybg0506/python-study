@@ -1,4 +1,5 @@
 from papago3 import translation
+from LanguageSensing import LangSensing
 
 '''
 ko : 한국어
@@ -18,8 +19,14 @@ id : 인도네시아어
 hi : 힌디어
 '''
 
-content = '으아악'
+content = 'the amount of frustration i swear'
 
-result = translation(content, 'ko', 'en')
+Lang = LangSensing(content)
 
-print(result)
+if Lang == 'ko':
+    result = translation(content, Lang, 'en')
+else:
+    result = translation(content, Lang, 'ko')
+
+print(f'언어감지 : {Lang}')
+print(f'번역문 : {result}')
