@@ -9,7 +9,7 @@ echo CreateObject("InternetExplorer.Application").Visible=true> "C:\IE\InternetE
 '''
 
 '''
-설명
+.bat(배치파일 만드는방법) 설명
 
 @echo off       : on쓰면  아래에 쓴 명령어가 cmd에 보임, off쓰면 안보임
 mkdir "C:\IE"   : 경로에 폴더생성해줘
