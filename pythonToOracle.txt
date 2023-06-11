@@ -1,0 +1,8 @@
+import cx_Oracle
+ 
+# 접속 문자열 형식: [사용자 이름]/[비밀번호]@//[호스트 이름]:[포트]/[DB 서비스 이름]
+conn = cx_Oracle.connect("[사용자 이름]/[비밀번호]@//localhost:1521/XEPDB1")
+cur = conn.cursor()
+cur.execute("SELECT 'Hello World!' FROM dual")
+res = cur.fetchall()
+print(res)

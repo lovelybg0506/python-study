@@ -1,0 +1,217 @@
+
+toDoList 폴더 생성
+
+폴더 열어서 폴더의 주소창에 cmd
+'''
+python -m venv venv
+'''
+입력해서 가상환경 만들기 (flask에서 제공) 이 명령어를 실행하면 venv라는 폴더가 만들어지고
+그 안에 Include,Lib,Scripts폴더와 pyvenv.cfg 파일이 생성됨
+
+그 후
+'''
+venv\Scripts\activate
+'''
+명령어 실행시켜서 활성화된 가상환경에 들어감
+
+cmd를 그냥 켜고 pip list를 통해 설치된 패키지를 확인해보면 지금까지 설치한 패키지들이 나오는데
+이 새로 활성화시킨 가상환경에서는 pip list를 썼을때에 아무것도 나오지않음.
+
+새로 활성화시킨 가상환경에서 
+'''
+pip install flask
+'''
+명령어 실행
+
+--------------------------------------------------------------------------------------------------
+
+app.py 파일 생성
+'''
+from flask import Flask
+
+app = Flask(__name__)
+
+
+@app.route('/')
+def index():
+    return 'Index Page'
+'''
+까지 적고 가상환경 cmd에서
+flask run 명령어 실행
+
+근데 개발할땐 디버그모드로 써야하니까 서버 내리고
+가상환경 cmd에
+'''
+setFLASK_ENV=development
+'''
+명령어 실행 (디버그모드 on)
+
+app.py 파일에
+'''
+if __name__ == "__main__":
+    app.run(debug=True)
+'''
+추가후 가상환경cmd에서
+python app.py 실행하면 작동됨 (이게 없으면 작동안함) (이부분은 python 프로그램의 맨 마지막에 쓰여있어야함)
+
+'''
+@app.route('/about')
+def about():
+    return '<h1>About Page</h1>'
+'''
+about 페이지 라우팅
+
+
+toDoList 폴더 안에 templates 폴더생성
+
+render_template import 추가
+
+'''
+@app.route('/')
+def index():
+    return render_template('index.html')
+'''
+index 라우팅 return부분 수정
+
+templates 폴더에 index.html 파일 생성
+생성된 파일에 html적고 도움닫기?에서 html:5쓰면 html 기본코드 써줌
+
+------------------------------------------------------------------------------------------------
+부트스트랩 사용
+https://getbootstrap.com/
+5.1.3v 사용, Starter template부분 copy
+templates폴더에 dashboard 폴더 생성
+templates폴더에 partials 폴더 생성
+
+dashboard폴더안에 index.html 파일넣기
+
+'''
+@app.route('/')
+def index():
+    return render_template('dashboard/index.html')
+'''
+index.html 경로 수정했으니 라우팅 return 경로 수정
+
+base.html 파일 생성후 부트스트랩 홈페이지에서 copy한 내용 붙여넣기
+
+붙여넣기한 내용중
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+이부분(cdn)은 콘텐츠 전송 네트워크임.
+이 클래스가 온라인으로 호스팅 되는곳. 그래서 내가 사용할 수 있게됨.
+
+index.html 내용 다지운 후
+{% extends 'partials/base.html' %}
+index.html에 이 한줄만 적으면 base.html에 있는내용으로 페이지 보여주는것
+{} 를사용할 수있는 이유 : flask install 할때 Jinja2 라는 패키지 때문
+
+base.html
+'''
+<title>Home</title>
+    <h1>Index Page from Base</h1>
+'''
+title과 h1 수정
+
+'''
+@app.route('/about')
+def about():
+    return render_template('dashboard/about.html')
+'''
+about 라우팅 return 수정
+dashboard폴더안에 about.html 파일 생성
+
+
+base.html
+'''
+<h1>Index Page from Base</h1>
+부분 아래 문장으로 수정
+{% block content %} {% endblock %}
+'''
+이렇게 쓰고
+
+index.html
+'''
+{% extends 'partials/base.html' %} <br />
+{% block content %}
+<h1>Home Page</h1>
+{% endblock %}
+'''
+이런식으로 수정하면 base html에 block content ~ endblock 사이에 코드를 넣을 수 있음
+
+about.html
+'''
+{% extends 'partials/base.html' %} <br />
+{% block content %}
+<h1>About Page</h1>
+{% endblock %}
+'''
+
+partials폴더에 nav.html 파일 생성
+<h1>Navbar</h1>
+추가
+
+
+base.html - body태그에
+'''
+{% include 'partials/nav.html' %} <br />
+'''
+추가
+
+base.html - title 태그도
+'''
+{% block title %} {% endblock %}
+'''
+수정
+
+그리고 index.html과 about.html에 추가해서 title 수정
+-------------------------------------------------------------------------------------------------
+
+bootstrap홈페이지에서 navbar 검색 후 copy
+copy한 내용 nav.html에 붙여넣기 후
+맨 윗줄 navbar , bg - dark로 수정
+'''
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+'''
+
+두번째 줄의 fluid 를 제거하면 Navbar에 좌우여백이 들어감
+'''
+<div class="container-fluid">
+'''
+
+이외 수정사항
+<a class="navbar-brand" href="#">ToDo App</a>
+<a class="nav-link" href="#">About</a>
+
+삭제한 코드
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Dropdown
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <li><a class="dropdown-item" href="#">Action</a></li>
+        <li><a class="dropdown-item" href="#">Another action</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item" href="#">Something else here</a></li>
+    </ul>
+    </li>
+    <li class="nav-item">
+    <a class="nav-link disabled">Disabled</a>
+</li>
+
+수정한 코드
+<a class="navbar-brand" href="{{url_for('index')}}">ToDo App</a>
+<a class="nav-link active" aria-current="page" href="{{url_for('index')}}">Home</a>
+<a class="nav-link" href="{{url_for('about')}}">About</a>
+
+url_for('함수') 사용법임
+href="#" 이라고 되어있던걸 {{url_for('함수명')}} 으로 수정해서 클릭했을때 app.py의 함수가 실행되도록 수정한것
+
+--------------------------------------------------------------------------------------------------------
+
+index.html 수정
+.container 쓰면 div class="container" 써짐 (div class태그 만드는방법인듯)
+<div class="container">
+    <h1>Home Page</h1>
+</div>
+이렇게 container안에 h1태그를 넣으면 왼쪽에 여백이생김
+
+쭉 index 작성
