@@ -42,7 +42,7 @@ flask run 명령어 실행
 근데 개발할땐 디버그모드로 써야하니까 서버 내리고
 가상환경 cmd에
 '''
-setFLASK_ENV=development
+set FLASK_ENV=development
 '''
 명령어 실행 (디버그모드 on)
 
@@ -215,3 +215,32 @@ index.html 수정
 이렇게 container안에 h1태그를 넣으면 왼쪽에 여백이생김
 
 쭉 index 작성
+
+----------------------------------------------------------------------------------------------------------
+database 연결하기 위한 패키지 설치
+'''
+pip install flask-sqlalchemy
+'''
+
+import 추가
+from flask_sqlalchemy import SQLAlchemy
+
+python interpreter 변경 (View - CommandPalette - Python:SelectInterpreter - (가상환경 경로안에있는 python.exe 선택))
+
+app.py 에 추가한내용
+'''
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///sqlite.db'
+db = SQLAlchemy(app)
+
+# Create Models
+class Todo(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(100))
+    complete = db.Column(db.Boolean, default=False)
+'''
+
+cmd에
+python 입력해서 python창으로 들어간후
+>>>from app import db
+>>>db.create_all()       # 여기서 오류남. 2023.06.12
