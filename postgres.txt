@@ -1,0 +1,52 @@
+sudo service postgresql start   [postgres server on]
+sudo -u postgres psql           [postgresql 접속]
+
+
+\l                          [DB 리스트 출력]
+CREATE DATABASE test;       [test라는 DB 생성]
+\c test                     [test에 연결(c는 connect의 약자)]
+CREATE TABLE person (...)   [person 이라는 table 생성]
+\d                          [연결된 DB의 전체 테이블 확인]
+\d person                   [연결된 DB중 person의 컬럼 확인]
+
+port : 5432
+                            [맨 마지막에 세미콜론 붙이기]
+
+[DATA TYPE]
+INT         : 정수
+SERIAL      : 시퀀스 숫자
+TEXT        : 문자열
+BOOL        : True OR False
+DATE        : 날짜
+TIMESTAMPTZ : 타임존이 포함된 날짜 및 시간 (만약 현재시간이 필요하면 now())
+JSON, 함수 등
+
+[CREATE TABLE]
+CREATE TABLE person (
+    id SERIAL NOT NULL PRIMARY KEY,
+    name TEXT NOT NULL,
+    gender TEXT NOT NULL,
+    date_of_birth DATE NOT NULL,
+    email TEXT,
+    create_at TIMESTAMPTZ DEFAULT now()
+);
+
+[INSERT]
+INSERT INTO person(
+    name,
+    gender,
+    date_of_birth)
+VALUES ('bgkang', 'Man', DATE'1996-05-06');
+
+[UPDATE]
+UPDATE person
+    SET
+        name = 'ByeongGyuKang',
+        gender = 'MAN'
+    WHERE
+        id = 1;
+
+[DELETE]
+DELETE FROM person
+    WHERE id = 3;
+
