@@ -40,12 +40,12 @@
             <div class="card shadow">
                 <div class="card-header">ToDo Form</div>
                 <div class="card-body">
-                    <form action="">
+                    <form action="/add" method="POST">
                         <label for="">Title</label>
                         <input 
                             class="form-control"
                             type="text" 
-                            name="title" 
+                            name="title"
                             placeholder="Add todo..."
                         />
                         <input 
@@ -58,30 +58,16 @@
             </div>
         </div>
     </div>
+    {% for todo in todo_list %}
     <div class="border-start border-5 mt-3 shadow"> <!-- border쓰고 border-5 두께5, border-primary 파랑색 , mt-3 여백 3, shadow 그림자-->
                                                     <!-- border-start : 왼쪽에만 테두리생성-->
         <div class="card-body">
-            <h5>1 | Learn Python</h5>
+            <h5>{{ todo[0] }} | {{ todo[1] }} | {{ todo[2] }}</h5> <!-- 0 : id , 1 : title, 2 : complete-->
             <span class="badge bg-success">Complete</span>
-            <a class="btn btn-info btn-sm" href="">Update</a>
-            <a class="btn btn-danger btn-sm" href="">Delete</a>
+            <a class="btn btn-info btn-sm" href="/update/{{ todo[0] }}">Update</a>
+            <a class="btn btn-danger btn-sm" href="/delete/{{ todo[0] }}">Delete</a>
         </div>
     </div>
-    <div class="border-start border-5 mt-3 shadow">
-        <div class="card-body">
-            <h5>1 | Learn Python</h5>
-            <span class="badge bg-success">Complete</span>
-            <a class="btn btn-info btn-sm" href="">Update</a>
-            <a class="btn btn-danger btn-sm" href="">Delete</a>
-        </div>
-    </div>
-    <div class="border-start border-5 mt-3 shadow">
-        <div class="card-body">
-            <h5>1 | Learn Python</h5>
-            <span class="badge bg-success">Complete</span>
-            <a class="btn btn-info btn-sm" href="">Update</a>
-            <a class="btn btn-danger btn-sm" href="">Delete</a>
-        </div>
-    </div>
+    {% endfor %}
 </div>
 {% endblock %}

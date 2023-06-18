@@ -1,2 +1,9 @@
+#todolist 전반적인부분
 https://www.youtube.com/watch?v=x6tbuhWbt0Y
 https://www.youtube.com/watch?v=oWCEFQRL1lA
+(여기서는 splite로 db연결하고 설정했지만)
+
+내 db설정은 postgres로 함
+#postgres
+https://www.youtube.com/watch?v=CBU-cCUUdgA&list=PLLDrd87CR4wjTCM53gZcffnJmpyAWJERL&index=3
+
