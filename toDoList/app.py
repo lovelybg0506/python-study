@@ -12,7 +12,7 @@ cursor=db.cursor()
 @app.route('/')
 def index():
     db = CRUD()
-    todo_list = db.readDB(schema='public',table='todolist',column='*')
+    todo_list = db.readDB(schema='public',table='todolist',column='*',condition='order by id asc')
     # print(todo_list[0][1])
     return render_template('dashboard/index.html', todo_list=todo_list)
 
@@ -32,12 +32,13 @@ def delete(id):
 @app.route('/update/<int:id>')
 def update(id):
     db = CRUD()
-    todo_list = db.readDB(schema='public',table='todolist',column='*')
-    print(todo_list[id+1][2]) # 이부분 하다가 중단...
-    if todo_list[id+1][2] == 'True':
-        TrueOrFalse = 'False'
+    todo_list = db.readDB(schema='public',table='todolist',column='*',condition='order by id asc')
+    tofvar = todo_list[id-1][2]
+    print(f"tofvar : {tofvar}")
+    if tofvar:
+        TrueOrFalse = 'false'
     else:
-        TrueOrFalse = 'True'
+        TrueOrFalse = 'true'
 
     db.updateDB(schema='public',table='todolist',column='complete',value=TrueOrFalse,condition=f'id={id}')
     return redirect(url_for('index'))

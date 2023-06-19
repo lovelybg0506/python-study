@@ -10,8 +10,8 @@ class CRUD(databases):
         except Exception as e:
             print(" inser DB err", e)
     
-    def readDB(self, schema, table, column):
-        sql = f" SELECT {column} from {schema}.{table};".format(column=column,schema=schema,table=table)
+    def readDB(self, schema, table, column, condition):
+        sql = f" SELECT {column} from {schema}.{table} {condition};".format(column=column,schema=schema,table=table,condition=condition)
         try:
             self.cursor.execute(sql)
             result = self.cursor.fetchall()
@@ -21,9 +21,10 @@ class CRUD(databases):
         return result
 
     def updateDB(self, schema, table, column, value, condition):
-        sql = f" UPDATE {schema}.{table} SET {column}='{value}' WHERE ='{condition}';".format(schema=schema,table=table,column=column,value=value,condition=condition)
+        sql = f" UPDATE {schema}.{table} SET {column}='{value}' WHERE {condition};".format(schema=schema,table=table,column=column,value=value,condition=condition)
+        print(f'sql:{sql}')
         try :
-            self.cursor.execute(all)
+            self.cursor.execute(sql)
             self.db.commit()
         except Exception as e:
             print(" update DB err",e)
