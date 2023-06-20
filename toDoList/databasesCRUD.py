@@ -12,6 +12,7 @@ class CRUD(databases):
     
     def readDB(self, schema, table, column, condition):
         sql = f" SELECT {column} from {schema}.{table} {condition};".format(column=column,schema=schema,table=table,condition=condition)
+        print(f'sql:{sql}')
         try:
             self.cursor.execute(sql)
             result = self.cursor.fetchall()
